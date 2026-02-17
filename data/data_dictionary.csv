@@ -1,0 +1,9 @@
+﻿Column Name,Meaning,Data Type,Example,Notes
+Location,Sub-location or neighbourhood within Nairobi,String,Westlands,"Matched against 85+ known Nairobi sub-locations (longest-match-first). Defaults to ""Nairobi"" when sub-location cannot be parsed. Standardise and group sparse areas in Day 2."
+Property Type,Category of property inferred from listing title and description,String (categorical),Apartment,"One of: Apartment, House, Townhouse, Villa, Maisonette, Bungalow, Studio, Bedsitter, Land, Commercial. Defaults to Apartment."
+Bedrooms,Number of bedrooms,Integer / N/A,3,"N/A for Land and some Commercial listings. Cast with pd.to_numeric(errors=""coerce"") before modelling."
+Bathrooms,Number of bathrooms,Integer / N/A,2,N/A if not stated in the listing.
+Size (m2),Total floor area or plot size in square metres,Float / N/A,120.0,"Auto-converts: sqft x 0.0929, acres x 4046.86. N/A if not stated."
+Amenities,Comma-separated list of detected facilities and features,String (multi-value),"Swimming Pool, Parking, Security, Gym","""None"" if no keywords detected. 30 amenity types scanned across all sources. In Day 2, derive amenity_score = number of amenities detected."
+Price (KES),Asking price in Kenyan Shillings (digits only),Integer / N/A,12500000,"TARGET VARIABLE. Handles KSh/KES/Kshs prefix, xM shorthand, bare integers. N/A if unparseable. Cast with pd.to_numeric(errors=""coerce"")."
+Listing Date,Date or relative label when the property was listed,String / N/A,15 May 2024,"Absolute or relative (e.g. ""3 days ago""). N/A on sources that do not expose listing dates (PropertyPro, KPC, Maploti). Normalise in Day 2 to derive the month feature."
